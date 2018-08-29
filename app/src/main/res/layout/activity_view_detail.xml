@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context=".main.ActivityViewDetail"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        >
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation="Accordion"
+            custom:pager_animation_span="1100">
+        </com.daimajia.slider.library.SliderLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:cardCornerRadius="4dp"
+            android:layout_margin="4dp"
+            app:cardElevation="3dp">
+
+            <TextView
+                android:id="@+id/tv_userRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+    </RelativeLayout>
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_marginBottom="4dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+    </com.daimajia.slider.library.Indicators.PagerIndicator>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_restorant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Details"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Address" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_restorant_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="fill_vertical"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBlack" />
+
+                <Button
+                    android:id="@+id/btn_direction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/cardview_light_background"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="Direction"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Cuisines" />
+
+            <TextView
+                android:id="@+id/tv_restaurant_cuisines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Average Cost" />
+
+            <TextView
+                android:id="@+id/tv_average_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="Menu"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_menu_no_data"
+                    android:visibility="invisible"
+                    android:textAlignment="center"
+                    android:padding="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Daily Menu Data"
+                    android:background="@drawable/box_shape"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_daily_menu"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ln_review"
+                android:background="@color/cardview_shadow_end_color"
+                android:padding="12dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/tv_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:layout_weight="1"
+                    android:text="Review"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/img_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:progressTint="@color/colorBlack"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/tv_review_no_data"
+                    android:textAlignment="center"
+                    android:padding="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Review Data"
+                    android:background="@drawable/box_shape"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_review"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".main.SearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/back"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            tools:ignore="ContentDescription" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="Search by keyword"
+            android:textColorHint="@color/colorWhite"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:singleLine="true"
+            android:focusable="true"
+            android:cursorVisible="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By Location"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_res"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                >
+            </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
