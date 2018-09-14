@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
 
         initial()
 
-
         adapterCategory = AdapterCategory(categoryList, this)
         rv_nav_category?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_nav_category?.adapter = adapterCategory
