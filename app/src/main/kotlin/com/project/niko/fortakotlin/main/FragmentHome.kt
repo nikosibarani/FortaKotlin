@@ -88,10 +88,6 @@ class FragmentHome : Fragment() {
                     val restorants = response.getJSONArray("nearby_restaurants")
                     tv_count!!.text = restorants.length().toString() + " Restaurant"
 
-                    restaurantList.forEach { eachRestaurant -> println(eachRestaurant.name) }
-
-                    restorants.takeIf { eachRestaurant -> true }
-
                     for (i in 0 until restorants.length()) {
                         val restaurant = Restaurant()
                         restaurant.id = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("id"))
