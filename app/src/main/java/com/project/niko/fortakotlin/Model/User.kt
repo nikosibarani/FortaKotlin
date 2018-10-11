@@ -1,12 +1,12 @@
 package com.project.niko.fortakotlin.Model
 
-class User {
-    var name: String? = null
-    var zomatoHandle: String? = null
-    var foodieLevel: String? = null
-    var foodieLevelNum: Int? = null
-    var foodieColor: String? = null
-    var profileUrl: String? = null
-    var profileImage: String? = null
-    var profileDeeplink: String? = null
-}
+data class User (
+    var name: String,
+    var zomatoHandle: String,
+    var foodieLevel: String,
+    var foodieLevelNum: Int,
+    var foodieColor: String,
+    var profileUrl: String,
+    var profileImage: String,
+    var profileDeeplink: String
+)

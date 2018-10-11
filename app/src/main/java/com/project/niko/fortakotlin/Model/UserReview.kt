@@ -1,14 +1,14 @@
 package com.project.niko.fortakotlin.Model
 
-class UserReview {
-    var rating: Int? = null
-    var reviewText: String? = null
-    var id: String? = null
-    var ratingColor: String? = null
-    var reviewTimeFriendly: String? = null
-    var ratingText: String? = null
-    var timestamp: Int? = null
-    var likes: Int? = null
-    var user: User? = null
-    var commentsCount: Int? = null
-}
+data class UserReview (
+    var rating: Int,
+    var reviewText: String,
+    var id: String,
+    var ratingColor: String,
+    var reviewTimeFriendly: String,
+    var ratingText: String,
+    var timestamp: Int,
+    var likes: Int,
+    var user: User,
+    var commentsCount: Int
+)

@@ -22,10 +22,7 @@ import com.loopj.android.http.RequestParams
 import com.project.niko.fortakotlin.Adapter.AdapterDailyMenu
 import com.project.niko.fortakotlin.Adapter.AdapterReview
 import com.project.niko.fortakotlin.Helper.HelperAPI
-import com.project.niko.fortakotlin.Model.DailyMenu
-import com.project.niko.fortakotlin.Model.Restaurant
-import com.project.niko.fortakotlin.Model.User
-import com.project.niko.fortakotlin.Model.UserReview
+import com.project.niko.fortakotlin.Model.*
 import com.project.niko.fortakotlin.R
 import org.apache.http.Header
 import org.json.JSONException
@@ -63,7 +60,7 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
     internal var startTime: Long = 0
     private var loadTime : Long = 0
 
-    internal var restaurant = Restaurant()
+    internal var restaurant : Restaurant? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,12 +126,12 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
                 val exeTime = System.currentTimeMillis()
                 super.onSuccess(statusCode, headers, response)
                 try {
-                    restaurant.name = (response!!.getString("name"))
-                    val location = com.project.niko.fortakotlin.Model.Location()
-                    location.address = (response.getJSONObject("location").getString("address"))
+                    restaurant!!.name = (response!!.getString("name"))
+                    val location : Location? = null
+                    location!!.address = (response.getJSONObject("location").getString("address"))
                     location.latitude = (response.getJSONObject("location").getDouble("latitude"))
                     location.longitude = (response.getJSONObject("location").getDouble("longitude"))
-                    restaurant.location = location
+                    restaurant!!.location = location
                     tv_restaurant_name!!.text = response.getString("name")
                     tv_restorant_address!!.text = response.getJSONObject("location").getString("address")
                     tv_restorant_cuisines!!.text = response.getString("cuisines")
@@ -142,7 +139,7 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
                             + " for two people (approx.)")
                     tv_userRating!!.text = response.getJSONObject("user_rating").getString("aggregate_rating")
                     tv_userRating!!.setBackgroundColor(Color.parseColor("#" + response.getJSONObject("user_rating").getString("rating_color")))
-                    restaurant.featuredImage = (response.getString("featured_image"))
+                    restaurant!!.featuredImage = (response.getString("featured_image"))
                     initSlider(response.getString("featured_image"))
                     //getDailyMenu()
 
@@ -187,8 +184,8 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
                 try {
                     for (i in 0 until response!!.getJSONArray("user_reviews").length()) {
                         tv_review?.text = "Review (" + response.getInt("reviews_shown") + "/" + response.getInt("reviews_count") + ")"
-                        val review = UserReview()
-                        review.rating = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getInt("rating")
+                        val review : UserReview? = null
+                        review!!.rating = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getInt("rating")
                         review.reviewText = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getString("review_text")
                         review.id = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getString("id")
                         review.ratingColor = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getString("rating_color")
@@ -196,8 +193,8 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
                         review.ratingText = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getString("rating_text")
                         review.timestamp = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getInt("timestamp")
                         review.likes = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getInt("likes")
-                        val user = User()
-                        user.name = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getJSONObject("user").getString("name")
+                        val user : User? = null
+                        user!!.name = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getJSONObject("user").getString("name")
                         user.profileImage = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getJSONObject("user").getString("profile_image")
                         review.user = user
                         review.commentsCount = response.getJSONArray("user_reviews").getJSONObject(i).getJSONObject("review").getInt("comments_count")

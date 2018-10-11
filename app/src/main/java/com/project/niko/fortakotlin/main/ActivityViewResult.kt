@@ -66,13 +66,13 @@ class ActivityViewResult : AppCompatActivity() {
                 try {
                     val restorants = response!!.getJSONArray("restaurants")
                     for (i in 0 until restorants.length()) {
-                        val restaurant = Restaurant()
-                        restaurant.id = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("id"))
+                        val restaurant : Restaurant? = null
+                        restaurant!!.id = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("id"))
                         restaurant.name = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("name"))
                         restaurant.url = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("url"))
 
-                        val location = Location()
-                        location.address = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("address"))
+                        val location : Location? = null
+                        location!!.address = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("address"))
                         location.locality = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("locality"))
                         location.city = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("city"))
                         location.cityId = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getInt("city_id"))
@@ -81,18 +81,20 @@ class ActivityViewResult : AppCompatActivity() {
                         location.zipcode = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("zipcode"))
                         location.countryId = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getInt("country_id"))
                         location.localityVerbose = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("locality_verbose"))
-                        restaurant.location = location
+                        restaurant.location = (location)
                         restaurant.cuisines = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("cuisines"))
                         restaurant.averageCostForTwo = (restorants.getJSONObject(i).getJSONObject("restaurant").getInt("average_cost_for_two"))
 
-                        val userRating = UserRating()
-                        userRating.aggregateRating = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("aggregate_rating"))
+                        val userRating : UserRating? = null
+                        userRating!!.aggregateRating = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("aggregate_rating"))
                         userRating.ratingText = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("rating_text"))
                         userRating.ratingColor = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("rating_color"))
                         userRating.votes = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("votes"))
                         restaurant.userRating = (userRating)
+
                         restaurant.photosUrl = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("photos_url"))
                         restaurant.featuredImage = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("featured_image"))
+
                         restaurantList.add(restaurant)
                     }
 

@@ -1,7 +1,7 @@
 package com.project.niko.fortakotlin.Model
 
-class Dish {
-    var dishId: String? = null
-    var name: String? = null
-    var price: String? = null
-}
+data class Dish (
+    var dishId: String,
+    var name: String,
+    var price: String
+)

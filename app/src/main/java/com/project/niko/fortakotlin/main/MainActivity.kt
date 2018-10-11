@@ -29,12 +29,8 @@ import org.json.JSONObject
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    private val location: Location? = null
-
     private var rv_nav_category: RecyclerView? = null
     private var progressBar: ProgressBar? = null
-    private val tv_location_name: TextView? = null
 
     private val categoryList = ArrayList<Category>()
 
@@ -66,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         initial()
 
-
         adapterCategory = AdapterCategory(categoryList, this)
         rv_nav_category?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_nav_category?.adapter = adapterCategory
@@ -75,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().add(container, FragmentHome()).commit()
     }
-
 
     private fun initial() {
         rv_nav_category = this.findViewById(R.id.rv_category_nav)
@@ -102,7 +96,6 @@ class MainActivity : AppCompatActivity() {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-
             }
 
             override fun onFailure(statusCode: Int, headers: Array<Header>?, throwable: Throwable, errorResponse: JSONObject?) {

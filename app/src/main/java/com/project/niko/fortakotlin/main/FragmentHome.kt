@@ -77,7 +77,6 @@ class FragmentHome : Fragment() {
             override fun onSuccess(statusCode: Int, headers: Array<Header>?, response: JSONObject?) {
                 val timeWithoutNetwork = System.currentTimeMillis()
                 super.onSuccess(statusCode, headers, response)
-                myLocation = Location()
                 try {
                     myLocation!!.address = (response!!.getJSONObject("location").getString("title") + ", "
                             + response.getJSONObject("location").getString("city_name"))
@@ -93,13 +92,13 @@ class FragmentHome : Fragment() {
                     restorants.takeIf { eachRestaurant -> true }
 
                     for (i in 0 until restorants.length()) {
-                        val restaurant = Restaurant()
-                        restaurant.id = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("id"))
+                        val restaurant : Restaurant? = null
+                        restaurant!!.id = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("id"))
                         restaurant.name = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("name"))
                         restaurant.url = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("url"))
 
-                        val location = Location()
-                        location.address = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("address"))
+                        val location : Location? = null
+                        location!!.address = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("address"))
                         location.locality = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("locality"))
                         location.city = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("city"))
                         location.cityId = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getInt("city_id"))
@@ -112,8 +111,8 @@ class FragmentHome : Fragment() {
                         restaurant.cuisines = (restorants.getJSONObject(i).getJSONObject("restaurant").getString("cuisines"))
                         restaurant.averageCostForTwo = (restorants.getJSONObject(i).getJSONObject("restaurant").getInt("average_cost_for_two"))
 
-                        val userRating = UserRating()
-                        userRating.aggregateRating = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("aggregate_rating"))
+                        val userRating : UserRating? = null
+                        userRating!!.aggregateRating = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("aggregate_rating"))
                         userRating.ratingText = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("rating_text"))
                         userRating.ratingColor = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("rating_color"))
                         userRating.votes = (restorants.getJSONObject(i).getJSONObject("restaurant").getJSONObject("user_rating").getString("votes"))
@@ -126,7 +125,7 @@ class FragmentHome : Fragment() {
                     }
 
                     restaurantList
-                            .filter { it.name!!.startsWith("a") }
+                            .filter { it.name.startsWith("a") }
                             .sortedBy { it.name }
 
                     adapterRestaurant!!.notifyDataSetChanged()
