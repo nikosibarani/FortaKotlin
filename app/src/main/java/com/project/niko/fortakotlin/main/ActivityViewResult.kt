@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -17,16 +14,13 @@ import com.project.niko.fortakotlin.Model.Location
 import com.project.niko.fortakotlin.Model.Restaurant
 import com.project.niko.fortakotlin.Model.UserRating
 import com.project.niko.fortakotlin.R
+import kotlinx.android.synthetic.main.activity_view_result.*
 import org.apache.http.Header
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
 class ActivityViewResult : AppCompatActivity() {
-
-    private var rv_result_rest: RecyclerView? = null
-    private var tv_result_count: TextView? = null
-    private var progressBar: ProgressBar? = null
     private var adapterRestaurant: AdapterRestaurant? = null
     private val restaurantList = ArrayList<Restaurant>()
 
@@ -37,11 +31,10 @@ class ActivityViewResult : AppCompatActivity() {
         setContentView(R.layout.activity_view_result)
         supportActionBar!!.title = intent.getStringExtra("title")
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        initial()
 
         adapterRestaurant = AdapterRestaurant(restaurantList, this)
-        rv_result_rest!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_result_rest!!.adapter = adapterRestaurant
+        rv_search_result.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_search_result!!.adapter = adapterRestaurant
 
         getRestaurantData(0)
         //Thread(Runnable { getRestaurantData(0) }).start()
@@ -106,7 +99,7 @@ class ActivityViewResult : AppCompatActivity() {
                             getRestaurantData(restaurantList.size)
                         }
                     } else {
-                        tv_result_count!!.text = restaurantList.size.toString() + " Hasil"
+                        tv_result_count.text = restaurantList.size.toString() + " Hasil"
                         adapterRestaurant!!.notifyDataSetChanged()
                         progressBar!!.visibility = View.GONE
                         val endTime = System.currentTimeMillis()
@@ -127,12 +120,6 @@ class ActivityViewResult : AppCompatActivity() {
                 return false
             }
         })
-    }
-
-    private fun initial() {
-        rv_result_rest = this.findViewById(R.id.rv_search_result)
-        tv_result_count = this.findViewById(R.id.tv_result_count)
-        progressBar = this.findViewById(R.id.progressBar)
     }
 
     override fun onSupportNavigateUp(): Boolean {

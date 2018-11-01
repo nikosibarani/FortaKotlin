@@ -5,13 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -23,17 +21,13 @@ import com.project.niko.fortakotlin.Model.Location
 import com.project.niko.fortakotlin.Model.Restaurant
 import com.project.niko.fortakotlin.Model.UserRating
 import com.project.niko.fortakotlin.R
+import kotlinx.android.synthetic.main.activity_search.*
 import org.apache.http.Header
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 
 class SearchActivity : AppCompatActivity() {
-
-    private var et_search: EditText? = null
-    private var progressBar: ProgressBar? = null
-
-    private var rv_res: RecyclerView? = null
     private var adapterRestaurant: AdapterRestaurant? = null
     private val restaurantList = ArrayList<Restaurant>()
 
@@ -48,18 +42,14 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         loadTime = System.currentTimeMillis()
         init()
-        rv_res!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_res.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapterLocation = AdapterLocation(cityList, this)
-        rv_res!!.adapter = adapterLocation
+        rv_res.adapter = adapterLocation
         getCityDetail()
     }
 
     private fun init() {
-        et_search = this.findViewById(R.id.et_search)
-        rv_res = this.findViewById(R.id.rv_res)
-        progressBar = this.findViewById(R.id.progressBar)
-
-        et_search?.setOnEditorActionListener { _, actionId, _ ->
+        et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 adapterRestaurant = AdapterRestaurant(restaurantList, this)
                 rv_res!!.adapter = adapterRestaurant

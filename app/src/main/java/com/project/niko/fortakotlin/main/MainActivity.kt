@@ -6,22 +6,18 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.project.niko.fortakotlin.Adapter.AdapterCategory
 import com.project.niko.fortakotlin.Helper.HelperAPI
 import com.project.niko.fortakotlin.Model.Category
-import com.project.niko.fortakotlin.Model.Location
 import com.project.niko.fortakotlin.R
-import com.project.niko.fortakotlin.R.id.container
+import kotlinx.android.synthetic.main.activity_main.*
 import org.apache.http.Header
 import org.json.JSONArray
 import org.json.JSONException
@@ -29,25 +25,22 @@ import org.json.JSONObject
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private var rv_nav_category: RecyclerView? = null
-    private var progressBar: ProgressBar? = null
-
     private val categoryList = ArrayList<Category>()
 
     private var adapterCategory: AdapterCategory? = null
 
     private var menu: Menu? = null
     var executionTime: Long = 0
-    var startTime:Long = 0
+    var startTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startTime = System.currentTimeMillis()
         setContentView(R.layout.activity_main)
 
-        val toolbar : Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        val drawer : DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = object : ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerOpened(drawerView: View) {
@@ -60,20 +53,13 @@ class MainActivity : AppCompatActivity() {
         drawer.setDrawerListener(toggle)
         toggle.syncState()
 
-        initial()
-
         adapterCategory = AdapterCategory(categoryList, this)
-        rv_nav_category?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_nav_category?.adapter = adapterCategory
+        rv_category_nav.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_category_nav.adapter = adapterCategory
 
         //start fragment
         val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().add(container, FragmentHome()).commit()
-    }
-
-    private fun initial() {
-        rv_nav_category = this.findViewById(R.id.rv_category_nav)
-        progressBar = this.findViewById(R.id.progressBar)
+        fragmentManager.beginTransaction().add(R.id.container, FragmentHome()).commit()
     }
 
     private fun getCategoryData() {

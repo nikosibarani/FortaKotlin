@@ -36,7 +36,7 @@ class MapsActivit : AppCompatActivity(), OnMapReadyCallback {
 
     private var mMap: GoogleMap? = null
 
-    private var restaurant = Restaurant()
+    private var restaurant : Restaurant? = null
 
     internal var startTime: Long = 0
     @SuppressLint("MissingPermission")
@@ -61,10 +61,10 @@ class MapsActivit : AppCompatActivity(), OnMapReadyCallback {
         val tv_restorant_address = this.findViewById<TextView>(R.id.tv_restorant_address)
         val img = this.findViewById<ImageView>(R.id.img_photo)
 
-        tv_restorant_name.text = restaurant.name
-        tv_restorant_cuisines.text = restaurant.cuisines
-        tv_restorant_address.text = restaurant.location!!.address
-        PicassoClient.downloadImage(this, restaurant.featuredImage!!, img)
+        tv_restorant_name.text = restaurant!!.name
+        tv_restorant_cuisines.text = restaurant!!.cuisines
+        tv_restorant_address.text = restaurant!!.location.address
+        PicassoClient.downloadImage(this, restaurant!!.featuredImage, img)
     }
 
     /**
@@ -85,8 +85,8 @@ class MapsActivit : AppCompatActivity(), OnMapReadyCallback {
         mMap!!.addMarker(MarkerOptions().position(origin).title("Your Position")).showInfoWindow()
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(origin))
         mMap!!.setMinZoomPreference(15f)
-        val dest = LatLng(restaurant.location!!.latitude!!, restaurant.location!!.longitude!!)
-        mMap!!.addMarker(MarkerOptions().position(dest).title(restaurant.name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+        val dest = LatLng(restaurant!!.location.latitude, restaurant!!.location.longitude)
+        mMap!!.addMarker(MarkerOptions().position(dest).title(restaurant!!.name).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
 
         //        LatLng origin = new LatLng(-6.872029, 107.574092);
         //        System.out.println("destinatiaotio" + getIntent().getStringExtra("destLat"));

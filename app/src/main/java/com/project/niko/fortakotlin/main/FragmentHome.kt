@@ -22,6 +22,7 @@ import com.project.niko.fortakotlin.Model.Location
 import com.project.niko.fortakotlin.Model.Restaurant
 import com.project.niko.fortakotlin.Model.UserRating
 import com.project.niko.fortakotlin.R
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.apache.http.Header
 import org.json.JSONException
 import org.json.JSONObject
@@ -32,9 +33,6 @@ class FragmentHome : Fragment() {
     private var adapterRestaurant: AdapterRestaurant? = null
     private var myLocation: Location? = null
     private val restaurantList = ArrayList<Restaurant>()
-    private var tv_count: TextView? = null
-    private var tv_location_name: TextView? = null
-    private var rv_list_restorant: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -42,8 +40,8 @@ class FragmentHome : Fragment() {
         initial(view)
 
         adapterRestaurant = AdapterRestaurant(restaurantList, context)
-        rv_list_restorant!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv_list_restorant!!.adapter = adapterRestaurant
+        rv_nearby_rest.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv_nearby_rest.adapter = adapterRestaurant
 
         getRestaurantData()
 
@@ -51,10 +49,6 @@ class FragmentHome : Fragment() {
     }
 
     private fun initial(view: View) {
-        tv_location_name = view.findViewById(R.id.tv_location_name)
-        rv_list_restorant = view.findViewById(R.id.rv_nearby_rest)
-        tv_count = view.findViewById(R.id.tv_count)
-
         view.findViewById<View>(R.id.cv_search).setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
 //                    val intent = Intent(context, ActivityViewResult::class.java)
@@ -124,10 +118,6 @@ class FragmentHome : Fragment() {
                         restaurantList.add(restaurant)
                     }
 
-                    restaurantList
-                            .filter { it.name.startsWith("a") }
-                            .sortedBy { it.name }
-
                     adapterRestaurant!!.notifyDataSetChanged()
                     progressDialog.dismiss()
                     val currentTime = System.currentTimeMillis()
@@ -143,21 +133,4 @@ class FragmentHome : Fragment() {
     }
 
     private val operate = { x: Long, y : Long -> x - y }
-
-    private fun Sum(a : Int, b : Int): Int {
-        if (a != 0) {
-            return 1
-        } else {
-            return 0
-        }
-//        return a + b;
-    }
-
-    private fun nestedLoop() {
-        for (i in 0..9) {
-            for (j in 0 until i) {
-                //
-            }
-        }
-    }
 }

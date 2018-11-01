@@ -13,6 +13,8 @@ import com.project.niko.fortakotlin.main.MainActivity
 import com.project.niko.fortakotlin.Model.Category
 import com.project.niko.fortakotlin.R
 
+import kotlinx.android.synthetic.main.activity_search.*
+
 class AdapterCategory(private val categoryList: List<Category>, private val context: Context) : RecyclerView.Adapter<AdapterCategory.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterCategory.MyViewHolder {
@@ -39,10 +41,6 @@ class AdapterCategory(private val categoryList: List<Category>, private val cont
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tv_category_name: TextView
-
-        init {
-            tv_category_name = itemView.findViewById(R.id.tv_category_name)
-        }
+        val tv_category_name: TextView = itemView.findViewById(R.id.tv_category_name)
     }
 }

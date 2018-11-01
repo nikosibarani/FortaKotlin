@@ -7,11 +7,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
-import android.widget.*
+import android.widget.Toast
 import com.daimajia.slider.library.Animations.DescriptionAnimation
 import com.daimajia.slider.library.SliderLayout
 import com.daimajia.slider.library.SliderTypes.BaseSliderView
@@ -24,6 +23,7 @@ import com.project.niko.fortakotlin.Adapter.AdapterReview
 import com.project.niko.fortakotlin.Helper.HelperAPI
 import com.project.niko.fortakotlin.Model.*
 import com.project.niko.fortakotlin.R
+import kotlinx.android.synthetic.main.activity_view_detail.*
 import org.apache.http.Header
 import org.json.JSONException
 import org.json.JSONObject
@@ -31,23 +31,6 @@ import java.util.*
 
 @SuppressLint("Registered")
 class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
-
-    private var slider: SliderLayout? = null
-
-    private var tv_userRating: TextView? = null
-    private var tv_restaurant_name: TextView? = null
-    private var tv_restorant_address: TextView? = null
-    private var tv_restorant_cuisines: TextView? = null
-    private var tv_average_cost: TextView? = null
-    private var tv_menu_no_data: TextView? = null
-    private var tv_review : TextView? = null
-    private var rv_daily_menu: RecyclerView? = null
-    private var rv_review: RecyclerView? = null
-
-    private var ln_review: LinearLayout? = null
-    private var img_arrow: ImageView? = null
-    private var progressBar: ProgressBar? = null
-
     private val userReviewList = ArrayList<UserReview>()
     private val dailyMenuList = ArrayList<DailyMenu>()
 
@@ -70,28 +53,14 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
         init()
 
         reviewAdapter = AdapterReview(userReviewList, this)
-        rv_review!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_review!!.adapter = reviewAdapter
-        rv_daily_menu!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_review.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_review.adapter = reviewAdapter
+        rv_daily_menu.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         getDetail()
     }
 
     private fun init() {
-        slider = this.findViewById(R.id.slider)
-        tv_average_cost = this.findViewById(R.id.tv_average_cost)
-        tv_restorant_address = this.findViewById(R.id.tv_restorant_address)
-        tv_restorant_cuisines = this.findViewById(R.id.tv_restaurant_cuisines)
-        tv_userRating = this.findViewById(R.id.tv_userRating)
-        rv_daily_menu = this.findViewById(R.id.rv_daily_menu)
-        rv_review = this.findViewById(R.id.rv_review)
-        tv_restaurant_name = this.findViewById(R.id.tv_restorant_name)
-        tv_menu_no_data = this.findViewById(R.id.tv_menu_no_data)
-        tv_review = this.findViewById(R.id.tv_review)
-        ln_review = this.findViewById(R.id.ln_review)
-        img_arrow = this.findViewById(R.id.img_arrow)
-        progressBar = this.findViewById(R.id.progressBar)
-
         this.findViewById<View>(R.id.btn_direction).setOnClickListener {
             val intent = Intent(this@ActivityViewDetail, MapsActivit::class.java)
             intent.putExtra("originLat", -6.907745)
@@ -100,7 +69,7 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
             startActivity(intent)
         }
 
-        ln_review?.setOnClickListener {
+        ln_review.setOnClickListener {
             if (showReview) {
                 showReview = false
                 img_arrow?.startAnimation(collapse())
@@ -132,9 +101,9 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
                     location.latitude = (response.getJSONObject("location").getDouble("latitude"))
                     location.longitude = (response.getJSONObject("location").getDouble("longitude"))
                     restaurant!!.location = location
-                    tv_restaurant_name!!.text = response.getString("name")
+                    tv_restorant_name.text = response.getString("name")
                     tv_restorant_address!!.text = response.getJSONObject("location").getString("address")
-                    tv_restorant_cuisines!!.text = response.getString("cuisines")
+                    tv_restaurant_cuisines!!.text = response.getString("cuisines")
                     tv_average_cost!!.text = (response.getString("average_cost_for_two") + " " + response.getString("currency")
                             + " for two people (approx.)")
                     tv_userRating!!.text = response.getJSONObject("user_rating").getString("aggregate_rating")
