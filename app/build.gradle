@@ -9,7 +9,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.project.niko.fortakotlin"
-        minSdkVersion 27
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"

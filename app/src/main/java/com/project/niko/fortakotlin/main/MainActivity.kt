@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity() {
                         val category = Category(arrayCategory.getJSONObject(i).getJSONObject("categories").getString("id"),
                                 arrayCategory.getJSONObject(i).getJSONObject("categories").getString("name"))
                         categoryList.add(category)
+
+                        if(category.equals(categoryList.get(0))){
+                            categoryList.get(i).copy("1")
+                        }
                     }
                     adapterCategory?.notifyDataSetChanged()
                     progressBar?.visibility = View.GONE

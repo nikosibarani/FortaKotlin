@@ -28,12 +28,12 @@ class AdapterRestaurant(private val restaurantList: List<Restaurant>, private va
     override fun onBindViewHolder(holder: AdapterRestaurant.MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.tv_restorant_name.text = restaurantList[position].name
         holder.tv_restourant_cousines.text = restaurantList[position].cuisines
-        holder.tv_restourant_address.text = restaurantList[position].location!!.localityVerbose
+        holder.tv_restourant_address.text = restaurantList[position].location.localityVerbose
         holder.tv_price_approx.text = "Rp." + restaurantList[position].averageCostForTwo + " for two people(approx..)"
-        holder.tv_rating.text = restaurantList[position].userRating!!.aggregateRating
-        holder.tv_rating.setBackgroundColor(Color.parseColor("#" + restaurantList[position].userRating!!.ratingColor!!))
-        if (!restaurantList[position].featuredImage!!.isEmpty()) {
-            PicassoClient.downloadImage(context, restaurantList[position].featuredImage!!, holder.img_photo)
+        holder.tv_rating.text = restaurantList[position].userRating.aggregateRating
+        holder.tv_rating.setBackgroundColor(Color.parseColor("#" + restaurantList[position].userRating.ratingColor))
+        if (!restaurantList[position].featuredImage.isEmpty()) {
+            PicassoClient.downloadImage(context, restaurantList[position].featuredImage, holder.img_photo)
         }
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ActivityViewDetail::class.java)

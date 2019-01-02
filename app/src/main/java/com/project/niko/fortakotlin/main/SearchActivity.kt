@@ -15,7 +15,7 @@ import com.loopj.android.http.JsonHttpResponseHandler
 import com.loopj.android.http.RequestParams
 import com.project.niko.fortakotlin.Adapter.AdapterLocation
 import com.project.niko.fortakotlin.Adapter.AdapterRestaurant
-import com.project.niko.fortakotlin.Helper.HelperAPI.Companion.get
+import com.project.niko.fortakotlin.Helper.HelperAPI
 import com.project.niko.fortakotlin.Model.City
 import com.project.niko.fortakotlin.Model.Location
 import com.project.niko.fortakotlin.Model.Restaurant
@@ -69,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
         params.put("lat", -6.907745)
         params.put("lon", 107.609444)
 
-        get("search", params, object : JsonHttpResponseHandler() {
+        HelperAPI.get("search", params, object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Array<Header>?, response: JSONObject?) {
                 val startTime = System.currentTimeMillis()
                 super.onSuccess(statusCode, headers, response)
@@ -133,7 +133,7 @@ class SearchActivity : AppCompatActivity() {
         params.put("lon", 107.609444)
         params.put("count", 10)
 
-        get("locations", params, object : JsonHttpResponseHandler() {
+        HelperAPI.get("locations", params, object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Array<Header>?, response: JSONObject?) {
                 val startTime = System.currentTimeMillis()
                 super.onSuccess(statusCode, headers, response)
@@ -166,7 +166,7 @@ class SearchActivity : AppCompatActivity() {
         params.put("entity_id", city.cityId)
         params.put("entity_type", city.entityType)
 
-        get("location_details", params, object : JsonHttpResponseHandler() {
+        HelperAPI.get("location_details", params, object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Array<Header>?, response: JSONObject?) {
                 val startTime = System.currentTimeMillis()
                 super.onSuccess(statusCode, headers, response)

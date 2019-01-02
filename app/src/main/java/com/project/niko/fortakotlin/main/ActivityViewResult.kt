@@ -115,10 +115,6 @@ class ActivityViewResult : AppCompatActivity() {
                 super.onFailure(statusCode, headers, throwable, errorResponse)
                 Toast.makeText(this@ActivityViewResult, "Request Timeout", Toast.LENGTH_SHORT).show()
             }
-
-            override fun getUseSynchronousMode(): Boolean {
-                return false
-            }
         })
     }
 

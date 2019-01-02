@@ -61,12 +61,12 @@ class ActivityViewDetail : AppCompatActivity(), ViewPagerEx.OnPageChangeListener
     }
 
     private fun init() {
-        this.findViewById<View>(R.id.btn_direction).setOnClickListener {
-            val intent = Intent(this@ActivityViewDetail, MapsActivit::class.java)
-            intent.putExtra("originLat", -6.907745)
-            intent.putExtra("originLng", 107.609444)
-            intent.putExtra("restaurant", restaurant)
-            startActivity(intent)
+        btn_direction.setOnClickListener {
+//            val intent = Intent(this@ActivityViewDetail, MapsActivit::class.java)
+//            intent.putExtra("originLat", -6.907745)
+//            intent.putExtra("originLng", 107.609444)
+//            intent.putExtra("restaurant", restaurant)
+//            startActivity(intent)
         }
 
         ln_review.setOnClickListener {
